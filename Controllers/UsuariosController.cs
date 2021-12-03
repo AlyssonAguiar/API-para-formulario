@@ -7,9 +7,9 @@ using ApiFormularioNovidades.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiFormularioNovidades.Controllers
+namespace ApiFormularioNovidades.Controller
 {
-    [Route("api/[controller]")]
+    [Route("FormularioApi/[controller]")]
     [ApiController]
     public class UsuariosController : ControllerBase
     {
@@ -32,14 +32,17 @@ namespace ApiFormularioNovidades.Controllers
         }
 
         // GET api/<UsuariosController>/5
-        [HttpGet("{cpf}")]
-        public async Task<ActionResult<Usuarios>> GetUsuario(string cpf)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Usuarios>> GetUsuario(int id)
         {
-            var usuarios = await repository.GetById(cpf);
+            var usuario = await repository.GetById(id);
 
-            if (usuarios == null)
-                return NotFound("Usuario não encontrado pelo CPF informado");
-            return Ok(usuarios);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            return usuario;
         }
 
         // POST api/<UsuariosController>
@@ -49,18 +52,18 @@ namespace ApiFormularioNovidades.Controllers
             if (usuario == null)
                 return BadRequest("Usuario não pode ser cadastrado com sucesso!");
             await repository.Add(usuario);
-            return CreatedAtAction(nameof(GetUsuario), new { cpf = usuario.Cpf }, usuario);
+            return CreatedAtAction(nameof(GetUsuario), new { id = usuario.UsuarioId }, usuario);
         }
 
         // PUT api/<UsuariosController>/5
-        [HttpPut("{cpf}")]
-        public async Task<IActionResult> PutUsuarios(string cpf, Usuarios usuario)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUsuarios(int id, Usuarios usuario)
         {
-            if (cpf != usuario.Cpf)
-                return BadRequest("O CPF informado não corresponde a um CPF salvo!");
+            if (id != usuario.UsuarioId)
+                return BadRequest("O Id informado não corresponde a um id salvo!");
             try
             {
-                await repository.Update(cpf, usuario);
+                await repository.Update(id, usuario);
             }
             catch (DbUpdateConcurrencyException e)
             {
@@ -70,16 +73,17 @@ namespace ApiFormularioNovidades.Controllers
         }
 
         // DELETE api/<UsuariosController>/5
-        [HttpDelete("{cpf}")]
-        public async Task<ActionResult<Usuarios>> DeleteUsuario(string cpf)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Usuarios>> DeleteUsuario(int id)
         {
-            var usuario = await repository.GetById(cpf);
+            var usuario = await repository.GetById(id);
             if (usuario == null)
             {
-                return NotFound($"Produto de {cpf} foi não encontrado");
+                return NotFound($"Usuário com cpf: {id} foi não encontrado");
             }
-            await repository.Delete(cpf);
+            await repository.Delete(id);
             return Ok(usuario);
         }
+
     }
 }

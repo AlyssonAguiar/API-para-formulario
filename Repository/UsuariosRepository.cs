@@ -22,9 +22,9 @@ namespace ApiFormularioNovidades.Repository
             return await _dbContext.Set<Usuarios>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<Usuarios> GetById(string cpf)
+        public async Task<Usuarios> GetById(int id)
         {
-            return await _dbContext.Set<Usuarios>().FindAsync(cpf);
+            return await _dbContext.Set<Usuarios>().FindAsync(id);
         }
 
         public async Task Add(Usuarios usuario)
@@ -33,15 +33,15 @@ namespace ApiFormularioNovidades.Repository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Update(string cpf, Usuarios usuario)
+        public async Task Update(int id, Usuarios usuario)
         {
             _dbContext.Set<Usuarios>().Update(usuario);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(string cpf)
+        public async Task Delete(int id)
         {
-            var usuario = await GetById(cpf);
+            var usuario = await GetById(id);
             _dbContext.Set<Usuarios>().Remove(usuario);
             await _dbContext.SaveChangesAsync();
         }

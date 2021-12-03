@@ -10,12 +10,12 @@ namespace ApiFormularioNovidades.Interfaces
     {
         Task<IEnumerable<Usuarios>> GetAll();
 
-        Task<Usuarios> GetById(string cpf);
+        Task<Usuarios> GetById(int id);
 
         Task Add(Usuarios usuario);
 
-        Task Update(string cpf, Usuarios usuario);
+        Task Update(int id, Usuarios usuario);
 
-        Task Delete(string cpf);
+        Task Delete(int id);
     }
 }

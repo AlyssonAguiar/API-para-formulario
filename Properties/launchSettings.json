@@ -12,16 +12,17 @@
     "IIS Express": {
         "commandName": "IISExpress",
         "launchBrowser": true,
-        "launchUrl": "FormularioApi/Usuarios",
+        "launchUrl": "FormularioApi/",
         "environmentVariables": {
             "ASPNETCORE_ENVIRONMENT": "Development"
         }
     },
+
     "ApiFormularioNovidades": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "FormularioApi/Usuarios",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "launchUrl": "FormularioApi/",
+      "applicationUrl": "https://localhost:5001;https://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

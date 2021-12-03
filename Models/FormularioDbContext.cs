@@ -42,12 +42,6 @@ namespace ApiFormularioNovidades.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Genero)
-                    .IsRequired()
-                    .HasColumnName("GENERO")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Nome)
                     .IsRequired()
                     .HasColumnName("NOME")
@@ -65,10 +59,6 @@ namespace ApiFormularioNovidades.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Cpf)
-                    .HasColumnName("CPF")
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);
